@@ -1,11 +1,14 @@
-const http = require('http')
+const express = require('express')
+const app = express()
+const path = require('path')//ensure the path is always correct
 
-const server = http.createServer((req,res)=>{
-    //request and response parameter
-    console.log('user hit the server')
-    res.end('can set up text or html')
+//setup static and middleware
+app.use(express.static('./public'))
+
+app.get('*', (req, res) => {
+    res.status(404).send('resource not found')
 })
-
-server.listen(5000)
-//different port for different thing; https: 423 
+app.listen('5000', () => {
+    console.log('server is listening on port 5000')
+})
 
